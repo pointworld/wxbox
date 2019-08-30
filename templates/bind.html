@@ -19,9 +19,22 @@
     <div id="qrcode" style="width: 250px;height: 250px;background-color: white;margin: 100px auto;"></div>
   </div>
 </div>
-<script src="{% static "js/jquery.min.js" %}"></script>
-<script src="{% static "js/jquery.qrcode.min.js" %}"></script>
-<script src="{% static "js/qrcode.js" %}"></script>
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous">
+</script>
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/lrsjng.jquery-qrcode/0.17.0/jquery-qrcode.js"
+  integrity="sha256-ApeIV0fHzfJORA80z6GJZ+LyzhTHEQ//0BW07F6yuq4="
+  crossorigin="anonymous">
+</script>
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/jquery.qrcode/1.0/jquery.qrcode.min.js"
+  integrity="sha256-9MzwK2kJKBmsJFdccXoIDDtsbWFh8bjYK/C7UjB1Ay0="
+  crossorigin="anonymous">
+</script>
+
 <script>
   function getBindUserQcode() {
     $.ajax({
