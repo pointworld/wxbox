@@ -1,0 +1,17 @@
+# 微信消息接收者 id
+WX_ID=xxx
+
+# 微信 Token：用于生成签名，微信服务器用来验证网站服务器地址
+WX_TOKEN=xxx
+
+# 微信消息模版 id
+WX_TEMPLATE_ID=xxx
+
+# 微信 app ID
+WX_APP_ID=xxx
+
+# 微信 app 密钥
+WX_APP_SECRET=xxx
+
+# 微信回调 URL
+WX_REDIRECT_URI=xxx

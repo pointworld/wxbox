@@ -1,23 +1,32 @@
-import json
+"""
+通过 requests 模块简单实现微信消息推送
+"""
 
+import json, os
+
+import django
 import requests
+from django.conf import settings
 
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'wxbox.settings')
+django.setup()
 
 CONFIG = {
     # app ID
-    'app_id': 'wxd3ce48b9dae1832d',
+    'app_id': settings.WECHAT_CONFIG['app_id'],
     # app 密钥
-    'app_secret': '6c5c23b057111246533e7073f5372683',
+    'app_secret': settings.WECHAT_CONFIG['app_secret'],
     # 获取访问 token 的 URL
-    'get_token_url': 'https://api.weixin.qq.com/cgi-bin/token',
+    'get_token_url': settings.WECHAT_CONFIG['get_cgi_token_url'],
     # 发送普通消息的 URL
-    'post_custom_msg_url': 'https://api.weixin.qq.com/cgi-bin/message/custom/send',
+    'post_custom_msg_url': settings.WECHAT_CONFIG['post_custom_msg_url'],
     # 发送模版消息的 URL
-    'post_template_msg_url': 'https://api.weixin.qq.com/cgi-bin/message/template/send',
+    'post_template_msg_url': settings.WECHAT_CONFIG['post_template_msg_url'],
     # 消息模版 id
-    'template_id': 'yQgnKiMRO6gqH2cHpHr216uhwRgpHQi0bKyukr0Ele4',
+    'template_id': settings.WECHAT_CONFIG['template_id'],
     # 消息接收者 id
-    'wx_id': 'oKS5k1R3HNMhSWYCdnvflDH_FxcA',
+    'wx_id': settings.WECHAT_CONFIG['wx_id'],
 }
 
 
@@ -40,7 +49,6 @@ def get_access_token(app_id, app_secret):
     )
 
     return req.json()['access_token']
-
 
 def send_custom_msg_to_user(wx_id, msg, access_token):
     """
@@ -72,7 +80,6 @@ def send_custom_msg_to_user(wx_id, msg, access_token):
     )
 
     print(req.text)
-
 
 def send_template_msg_to_user(wx_id, template_msg, access_token):
     body = {

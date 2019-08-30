@@ -1,22 +1,16 @@
 import os, sys
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+from decouple import config
+
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'v4!kq@*%)1hh!oulk+l(tl5htv3@&_qgd-&43rwz8i&hk0g*&q'
 
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
-
-# Application definition
+ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -25,6 +19,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'message',
 ]
 
 MIDDLEWARE = [
@@ -58,20 +54,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'wxbox.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
-
-# Password validation
-# https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -88,10 +76,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
-# Internationalization
-# https://docs.djangoproject.com/en/2.2/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -106,3 +90,26 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
+WECHAT_CONFIG = {
+    # app ID
+    'app_id': config('WX_APP_ID'),
+    # app 密钥
+    'app_secret': config('WX_APP_SECRET'),
+    # 微信 Token：用于生成签名，微信服务器用来验证网站服务器地址
+    'token': config('WX_TOKEN'),
+    # 消息模版 id
+    'template_id': config('WX_TEMPLATE_ID'),
+    # 消息接收者 id
+    'wx_id': config('WX_ID'),
+    # 回调 URL
+    'redirect_uri': config('WX_REDIRECT_URI'),
+    # 获取访问 cgi token 的 URL
+    'get_cgi_token_url': 'https://api.weixin.qq.com/cgi-bin/token',
+    # 获取访问 oauth2 token 的 URL
+    'get_oauth2_token_url': 'https://api.weixin.qq.com/sns/oauth2/access_token',
+    # 发送普通消息的 URL
+    'post_custom_msg_url': 'https://api.weixin.qq.com/cgi-bin/message/custom/send',
+    # 发送模版消息的 URL
+    'post_template_msg_url': 'https://api.weixin.qq.com/cgi-bin/message/template/send',
+}
