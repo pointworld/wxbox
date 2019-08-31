@@ -1,11 +1,11 @@
 """
-通过 requests 模块简单实现微信消息推送
+通过 requests 模块简单实现微信推送推送
 """
 
 import json, os
 
-import django
 import requests
+import django
 from django.conf import settings
 
 
@@ -39,7 +39,7 @@ def get_access_token(app_id, app_secret):
     :return: access_token
     """
 
-    req = requests.get(
+    res = requests.get(
         url=CONFIG['get_token_url'],
         params={
             "grant_type": "client_credential",
@@ -48,7 +48,7 @@ def get_access_token(app_id, app_secret):
         }
     )
 
-    return req.json()['access_token']
+    return res.json()['access_token']
 
 def send_custom_msg_to_user(wx_id, msg, access_token):
     """
