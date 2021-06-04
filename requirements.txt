@@ -1,6 +1,6 @@
 certifi==2019.6.16
 chardet==3.0.4
-Django==2.2.4
+Django==2.2.21
 idna==2.8
 optionaldict==0.1.1
 python-dateutil==2.8.0
